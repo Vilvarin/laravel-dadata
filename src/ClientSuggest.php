@@ -49,35 +49,33 @@ class ClientSuggest
 
     public function findParty($inn, $kpp = null)
     {
-        // $result = false;
+        $result = false;
 
-        // if ($ch = curl_init($this->baseUrlFindById . 'party')) {
-        //     curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-        //     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-        //         'Content-Type: application/json',
-        //         'Accept: application/json',
-        //         'Authorization: Token ' . $this->token
-        //     ));
-        //     curl_setopt($ch, CURLOPT_POST, 1);
+        if ($ch = curl_init($this->baseUrlFindById . 'party')) {
+            curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Accept: application/json',
+                'Authorization: Token ' . $this->token
+            ));
+            curl_setopt($ch, CURLOPT_POST, 1);
 
-        //     $query = ['query' => $inn];
+            $query = ['query' => $inn];
             
-        //     if (empty($kpp)) {
-        //         $query['branch_type'] = 'MAIN';
-        //     } else {
-        //         $query['kpp'] = $kpp;
-        //     }
+            if (empty($kpp)) {
+                $query['branch_type'] = 'MAIN';
+            } else {
+                $query['kpp'] = $kpp;
+            }
 
-        //     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($query));
 
-        //     $result = curl_exec($ch);
-        //     $result = json_decode($result, true);
+            $result = curl_exec($ch);
+            $result = json_decode($result, true);
 
-        //     curl_close($ch);
-        // }
+            curl_close($ch);
+        }
 
-        // return $result;
-
-        dump($this->config);
+        return $result;
     }
 }
